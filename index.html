@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link
+			rel="preconnect"
+			href="https://fonts.gstatic.com"
+			crossorigin
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap"
+			rel="stylesheet"
+		/>
+		<title>Stopwatch</title>
+
+		<style>
+			body {
+				background-color: #fea600;
+				text-align: center;
+				color: #fff;
+				font-family: "Roboto", sans-serif;
+			}
+
+			h1,
+			h2,
+			div {
+				font-size: 36px;
+			}
+
+			div {
+				margin: 15 auto;
+
+				font-weight: bold;
+			}
+
+			button {
+				width: 180px;
+				padding: 15px 50px;
+				margin: 24px 10px;
+				background-color: #fea600;
+				color: #fff;
+				border: 1px solid #fff;
+				border-radius: 5px;
+				font-size: 18px;
+				font-weight: 600;
+				font-family: "Roboto", sans-serif;
+				cursor: pointer;
+				transition: 200ms ease-in-out;
+			}
+
+			button:hover {
+				border: 1px solid #fea600;
+				background: #fff;
+				color: #fea600;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>STOPWATCH</h1>
+		<h2>VANILLA JAVASCRIPT STOPWATCH</h2>
+		<div>
+			<span id="seconds">00</span>:<span id="tenths">00</span>
+		</div>
+
+		<span class="buttonElements">
+			<button id="start">Start</button>
+			<button id="stop">Stop</button>
+			<button id="reset">Reset</button>
+		</span>
+
+		<script>
+			let seconds = 00;
+			let tenths = 00;
+			let secondsPlaceHolder = document.getElementById("seconds");
+			let tenthsPlaceHolder = document.getElementById("tenths");
+			let Interval;
+
+			function startTimer() {
+				clearInterval(Interval);
+				Interval = setInterval(updateTimer, 10);
+			}
+
+			function stopTimer() {
+				clearInterval(Interval);
+			}
+
+			function resetTimer() {
+				seconds = "00";
+				tenths = "00";
+				let secondsPlaceHolder = document.querySelector("#seconds");
+				let tenthsPlaceHolder = document.querySelector("#tenths");
+
+				secondsPlaceHolder.innerHTML = seconds;
+				tenthsPlaceHolder.innerHTML = tenths;
+			}
+
+			function updateTimer() {
+				tenths++;
+
+				if (tenths <= 9) {
+					tenthsPlaceHolder.innerHTML = "0" + tenths;
+				}
+
+				if (tenths > 9) {
+					tenthsPlaceHolder.innerHTML = tenths;
+				}
+
+				if (tenths > 99) {
+					seconds++;
+					secondsPlaceHolder.innerHTML = "0" + seconds;
+					tenths = 0;
+					tenthsPlaceHolder.innerHTML = "0" + 0;
+				}
+
+				if (seconds > 9) {
+					secondsPlaceHolder.innerHTML = seconds;
+				}
+			}
+
+			let startButton = document.querySelector("#start");
+			startButton.addEventListener("click", startTimer);
+
+			let stopButton = document.querySelector("#stop");
+			stopButton.addEventListener("click", stopTimer);
+
+			let resetButton = document.querySelector("#reset");
+			resetButton.addEventListener("click", resetTimer);
+		</script>
+	</body>
+</html>
